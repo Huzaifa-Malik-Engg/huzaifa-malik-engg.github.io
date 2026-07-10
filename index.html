@@ -528,18 +528,24 @@
     </button>
     <div class="tile-body"><div class="tile-body-inner"><div class="tile-content">
       <p>I built an 11-degree-of-freedom model coupling a vehicle's suspension and body with a 7-segment human driver submodel, using anatomical spring-damper parameters. Sweeping speeds from 0 to 120 km/h across three road hump profiles, the model identifies the critical speed at which each profile produces peak head acceleration — evaluated against ISO 2631 vibration comfort thresholds.</p>
-      <figure class="full">
-        <img src="images/vib-diagram.jpg" alt="System diagram of the 11-DOF vehicle-driver model and hump profiles" loading="lazy">
-        <figcaption>FIG. 1 — The coupled vehicle–driver system and the three hump profiles</figcaption>
-      </figure>
-      <div class="cols cols-2 full">
+      <div class="pair full">
         <figure>
-          <img src="images/vib-simulink.jpg" alt="Simulink implementation of the defining equations" loading="lazy">
-          <figcaption>FIG. 2 — Defining equations in Simulink</figcaption>
+          <img src="images/vib-car.jpg" alt="11-DOF vehicle-driver system diagram" loading="lazy">
+          <figcaption>FIG. 1 — The coupled vehicle–driver system</figcaption>
         </figure>
+        <figure>
+          <img src="images/vib-humps.jpg" alt="Three road hump profiles" loading="lazy">
+          <figcaption>FIG. 2 — The three hump profiles</figcaption>
+        </figure>
+      </div>
+      <div class="pair full">
         <figure>
           <img src="images/vib-results.jpg" alt="Head acceleration versus car speed for three hump profiles" loading="lazy">
           <figcaption>FIG. 3 — Head acceleration vs. speed for each profile</figcaption>
+        </figure>
+        <figure>
+          <img src="images/vib-simulink.jpg" alt="Simulink implementation of the defining equations" loading="lazy">
+          <figcaption>FIG. 4 — Defining equations in Simulink</figcaption>
         </figure>
       </div>
     </div></div></div>
