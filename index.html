@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malik Huzaifa — Mechanical Engineer</title>
+<meta name="description" content="Portfolio of Malik Huzaifa — mechanical engineer specialising in instrumented systems, precision design, and experimental validation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEEF0;
+    --ink:#1B2430;
+    --ink-soft:#4A5568;
+    --signal:#2FA8A0;
+    --dim-red:#D1483A;
+    --line:#C3C8CF;
+    --card:#F7F8F9;
+    --mono:'IBM Plex Mono', monospace;
+    --sans:'Archivo', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--sans);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    /* faint graph-paper grid */
+    background-image:
+      linear-gradient(var(--line) 0.5px, transparent 0.5px),
+      linear-gradient(90deg, var(--line) 0.5px, transparent 0.5px);
+    background-size:48px 48px;
+    background-attachment:fixed;
+  }
+
+  .sheet{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+
+  /* ── header / intro ─────────────────────────────── */
+  header{
+    padding:72px 0 48px;
+  }
+  .drawing-frame{
+    position:relative;
+    border:1px solid var(--ink);
+    background:var(--card);
+    padding:48px 40px;
+  }
+  /* corner datum ticks */
+  .drawing-frame::before,
+  .drawing-frame::after{
+    content:"";
+    position:absolute;
+    width:14px;height:14px;
+    border-color:var(--dim-red);
+    border-style:solid;
+  }
+  .drawing-frame::before{top:-1px;left:-1px;border-width:2px 0 0 2px;}
+  .drawing-frame::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;}
+
+  .rev-stamp{
+    position:absolute;
+    top:12px;right:16px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:0.08em;
+  }
+
+  .intro{
+    display:flex;
+    gap:40px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .intro-photo{
+    width:180px;height:180px;
+    object-fit:cover;
+    border:1px solid var(--ink);
+    flex-shrink:0;
+    filter:grayscale(12%);
+  }
+  .intro-text{flex:1;min-width:280px;}
+  .intro-text .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--signal);
+    margin-bottom:10px;
+  }
+  .intro-text h1{
+    font-size:clamp(28px, 4.5vw, 44px);
+    font-weight:800;
+    letter-spacing:-0.02em;
+    line-height:1.1;
+    margin-bottom:14px;
+  }
+  .intro-text p{
+    color:var(--ink-soft);
+    max-width:56ch;
+    font-size:16px;
+  }
+  .intro-text p + p{margin-top:10px;}
+
+  /* ── section label ──────────────────────────────── */
+  .section-label{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:56px 0 24px;
+  }
+  .section-label span{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .section-label::after{
+    content:"";
+    flex:1;height:1px;
+    background:var(--ink);
+    opacity:0.4;
+  }
+
+  /* ── project tiles ──────────────────────────────── */
+  .tile{
+    position:relative;
+    border:1px solid var(--ink);
+    background:var(--card);
+    margin-bottom:28px;
+  }
+  .tile::before,
+  .tile::after{
+    content:"";
+    position:absolute;
+    width:12px;height:12px;
+    border-color:var(--dim-red);
+    border-style:solid;
+    pointer-events:none;
+    z-index:2;
+  }
+  .tile::before{top:-1px;left:-1px;border-width:2px 0 0 2px;}
+  .tile::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;}
+
+  .tile-head{
+    display:flex;
+    gap:24px;
+    align-items:center;
+    padding:20px 24px;
+    cursor:pointer;
+    user-select:none;
+    background:none;
+    border:none;
+    width:100%;
+    text-align:left;
+    font-family:var(--sans);
+    color:var(--ink);
+  }
+  .tile-head:focus-visible{
+    outline:2px solid var(--signal);
+    outline-offset:2px;
+  }
+  .tile-thumb{
+    width:104px;height:104px;
+    object-fit:cover;
+    border:1px solid var(--line);
+    flex-shrink:0;
+  }
+  .tile-title h2{
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .tile-title .tag{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--signal);
+    display:block;
+    margin-bottom:4px;
+  }
+  .tile-title p{
+    color:var(--ink-soft);
+    font-size:14px;
+    margin-top:4px;
+  }
+  .tile-toggle{
+    margin-left:auto;
+    font-family:var(--mono);
+    font-size:22px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+    transition:transform .3s ease;
+  }
+  .tile.open .tile-toggle{transform:rotate(45deg);color:var(--dim-red);}
+
+  .tile-body{
+    display:grid;
+    grid-template-rows:0fr;
+    transition:grid-template-rows .45s ease;
+  }
+  .tile.open .tile-body{grid-template-rows:1fr;}
+  .tile-body-inner{
+    overflow:hidden;
+  }
+  .tile-content{
+    padding:8px 24px 32px;
+    border-top:1px dashed var(--line);
+  }
+
+  .tile-content p{
+    color:var(--ink-soft);
+    font-size:15px;
+    max-width:72ch;
+    margin-bottom:18px;
+  }
+  .tile-content a{
+    color:var(--signal);
+    text-decoration:none;
+    border-bottom:1px solid currentColor;
+  }
+  .tile-content a:hover{color:var(--dim-red);}
+
+  figure{margin:0;}
+  figcaption{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-top:6px;
+    letter-spacing:0.04em;
+  }
+  .tile-content img{
+    width:100%;
+    display:block;
+    border:1px solid var(--line);
+    background:#fff;
+  }
+
+  .video-embed{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    border:1px solid var(--line);
+    background:#000;
+  }
+  .video-embed.portrait{
+    aspect-ratio:9/16;
+    max-width:340px;
+  }
+  .video-embed iframe{
+    position:absolute;inset:0;
+    width:100%;height:100%;
+    border:0;
+  }
+
+  /* layout helpers */
+  .cols{
+    display:grid;
+    gap:20px;
+  }
+  .cols-3{grid-template-columns:1.2fr 1fr 0.9fr;}
+  .cols-2{grid-template-columns:1fr 1.1fr;}
+  .stack{display:flex;flex-direction:column;gap:16px;}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .full{margin-top:22px;}
+
+  @media (max-width:760px){
+    .cols-3,.cols-2,.pair{grid-template-columns:1fr;}
+    .video-embed.portrait{max-width:100%;}
+    .tile-head{gap:14px;padding:16px;}
+    .tile-thumb{width:72px;height:72px;}
+    .drawing-frame{padding:32px 22px;}
+    .intro{gap:24px;}
+  }
+
+  /* ── footer ─────────────────────────────────────── */
+  footer{
+    margin:72px 0 48px;
+  }
+  .footer-frame{
+    border:1px solid var(--ink);
+    background:var(--card);
+    padding:32px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+    position:relative;
+  }
+  .footer-frame::before{
+    content:"";
+    position:absolute;
+    top:-1px;left:-1px;
+    width:12px;height:12px;
+    border:solid var(--dim-red);
+    border-width:2px 0 0 2px;
+  }
+  .footer-note{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    letter-spacing:0.06em;
+  }
+  .footer-links{
+    display:flex;
+    gap:26px;
+  }
+  .footer-links a{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid var(--signal);
+    padding-bottom:2px;
+  }
+  .footer-links a:hover{
+    color:var(--dim-red);
+    border-color:var(--dim-red);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- ══ INTRO ══════════════════════════════════════ -->
+  <header>
+    <div class="drawing-frame">
+      <span class="rev-stamp">SHEET 1 / 1 · REV A</span>
+      <div class="intro">
+        <img class="intro-photo" src="images/profile.jpg" alt="Portrait of Malik Huzaifa">
+        <div class="intro-text">
+          <div class="eyebrow">Mechanical Engineer · Instrumented Systems</div>
+          <h1>Malik Huzaifa</h1>
+          <p>I design and build instrumented mechanical systems — taking them from concept and CAD through prototyping, fabrication, and experimental validation. My current work develops an ultrasonic monitoring system for machining, combining precision fixture design, FEA simulation, and custom data acquisition software.</p>
+          <p>Erasmus Mundus Meta4.0 graduate across Centrale Lyon (France), Politecnico di Torino (Italy), and NTNU (Norway). I want to keep building systems that measure, sense, and make physical processes visible.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ PROJECTS ═══════════════════════════════════ -->
+  <div class="section-label"><span>Projects</span></div>
+
+  <!-- ── 01 · THESIS ─────────────────────────────── -->
+  <article class="tile" id="thesis">
+    <button class="tile-head" aria-expanded="false">
+      <img class="tile-thumb" src="images/thesis-thumb.jpg" alt="Instrumented cutting tool fixture">
+      <div class="tile-title">
+        <span class="tag">Master's Thesis · ENISE × EKOSCAN × CETIM</span>
+        <h2>Smart Instrumented Cutting Tool</h2>
+        <p>Ultrasonic monitoring of lubrication efficiency — fixture design, FEA, custom DAQ software.</p>
+      </div>
+      <span class="tile-toggle">+</span>
+    </button>
+    <div class="tile-body"><div class="tile-body-inner"><div class="tile-content">
+      <p>My master's thesis develops a non-invasive way to monitor what happens at the tool–chip interface during metal cutting, using phased array ultrasonics. I designed the instrumented fixture in SolidWorks and iterated it from 3D-printed prototypes to a metal build, simulated the acoustic behaviour in ABAQUS, and wrote US-Explorer — a complete Python data acquisition and analysis interface for the phased array controller. <a href="https://github.com/Huzaifa-Malik-Engg/US-Explorer" target="_blank" rel="noopener">View the code on GitHub</a>.</p>
+      <div class="cols cols-2">
+        <figure>
+          <div class="video-embed portrait">
+            <iframe src="https://www.youtube.com/embed/ykyyxlxTJsw" title="Fixture assembly and live signal demonstration" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <figcaption>FIG. 1 — Assembly of the fixture and live signal response</figcaption>
+        </figure>
+        <div class="stack">
+          <figure>
+            <img src="images/thesis-print-initial.jpg" alt="Initial 3D-printed prototype of the fixture" loading="lazy">
+            <figcaption>FIG. 2 — Initial 3D-printed prototype</figcaption>
+          </figure>
+          <figure>
+            <img src="images/thesis-metal-render.jpg" alt="CAD render of the final metal fixture" loading="lazy">
+            <figcaption>FIG. 3 — CAD render of the metal fixture</figcaption>
+          </figure>
+          <figure>
+            <img src="images/thesis-gui.jpg" alt="US-Explorer data acquisition interface" loading="lazy">
+            <figcaption>FIG. 4 — US-Explorer acquisition interface</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div></div></div>
+  </article>
+
+  <!-- ── 02 · TEXTILE ROBOT ──────────────────────── -->
+  <article class="tile" id="textile-robot">
+    <button class="tile-head" aria-expanded="false">
+      <img class="tile-thumb" src="images/robot-thumb.jpg" alt="UR5 robot sorting textiles">
+      <div class="tile-title">
+        <span class="tag">TU Chemnitz · Germany</span>
+        <h2>AI-Based Textile Recycling Robot</h2>
+        <p>UR5 arm + computer vision + 3D point clouds — a full pick-and-sort pipeline in one week.</p>
+      </div>
+      <span class="tile-toggle">+</span>
+    </button>
+    <div class="tile-body"><div class="tile-body-inner"><div class="tile-content">
+      <p>In a one-week intensive at TU Chemnitz, our team built an autonomous textile sorting system. An overhead camera detects and classifies items, a 3D point cloud identifies the highest graspable layer, and the UR5 arm picks each item and sorts it into the right bin. My focus was integrating the vision output into a reliable grasping strategy for deformable objects.</p>
+      <figure class="full">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/iNgtzLutfDQ" title="Textile sorting robot demonstration" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <figcaption>FIG. 1 — The system recognising, picking, and sorting items autonomously</figcaption>
+      </figure>
+      <figure class="full">
+        <img src="images/robot-group.jpg" alt="The project team in the lab with the robot setup" loading="lazy">
+        <figcaption>FIG. 2 — The team, with the robot cell behind us</figcaption>
+      </figure>
+      <div class="cols cols-3 full">
+        <figure>
+          <img src="images/robot-recognition.jpg" alt="AI object recognition of shapes in a tray" loading="lazy">
+          <figcaption>FIG. 3 — Object recognition</figcaption>
+        </figure>
+        <figure>
+          <img src="images/robot-pointcloud.jpg" alt="Point cloud with highest layer highlighted" loading="lazy">
+          <figcaption>FIG. 4 — Highest point-cloud layer</figcaption>
+        </figure>
+        <figure>
+          <img src="images/robot-pose.jpg" alt="End effector pose on target object" loading="lazy">
+          <figcaption>FIG. 5 — Computed end-effector pose</figcaption>
+        </figure>
+      </div>
+    </div></div></div>
+  </article>
+
+  <!-- ── 03 · DIGITAL TWIN ───────────────────────── -->
+  <article class="tile" id="digital-twin">
+    <button class="tile-head" aria-expanded="false">
+      <img class="tile-thumb" src="images/twin-thumb.jpg" alt="Digital twin of a wall panel factory">
+      <div class="tile-title">
+        <span class="tag">NTNU × VYRK AS · Norway</span>
+        <h2>Digital Twin of a Manufacturing Facility</h2>
+        <p>An AnyLogic model of a wall panel factory, built on a month of real production data.</p>
+      </div>
+      <span class="tile-toggle">+</span>
+    </button>
+    <div class="tile-body"><div class="tile-body-inner"><div class="tile-content">
+      <p>Working with VYRK AS, a Norwegian wall panel manufacturer, I modelled their complete production line in AnyLogic using one month of real production data. The model identified bottlenecks, quantified OEE losses, and simulated the effect of adding robotic arms to the line — giving factory management concrete numbers to weigh the upgrade against the baseline.</p>
+      <figure class="full">
+        <img src="images/twin-flowchart.jpg" alt="Flowchart of the production line structure" loading="lazy">
+        <figcaption>FIG. 1 — Production line structure, including the proposed robotic upgrade</figcaption>
+      </figure>
+      <div class="cols cols-2 full">
+        <figure>
+          <img src="images/twin-product.jpg" alt="Finished wall panel product" loading="lazy">
+          <figcaption>FIG. 2 — Finished product</figcaption>
+        </figure>
+        <figure>
+          <img src="images/twin-model.jpg" alt="AnyLogic model main view with machine statistics" loading="lazy">
+          <figcaption>FIG. 3 — The running AnyLogic model</figcaption>
+        </figure>
+      </div>
+      <div class="pair full">
+        <figure>
+          <img src="images/twin-cutting.jpg" alt="Cutting machine with suction arm placing a workpiece" loading="lazy">
+          <figcaption>FIG. 4 — Cutting station on the real line</figcaption>
+        </figure>
+        <figure>
+          <img src="images/twin-milling.jpg" alt="Milling machine and finished products with grooves and acoustic holes" loading="lazy">
+          <figcaption>FIG. 5 — Milling station and its output</figcaption>
+        </figure>
+      </div>
+    </div></div></div>
+  </article>
+
+
+
+  <!-- ── 05 · COLD STORAGE ───────────────────────── -->
+  <article class="tile" id="cold-storage">
+    <button class="tile-head" aria-expanded="false">
+      <img class="tile-thumb" src="images/cold-thumb.jpg" alt="Portable cold storage unit">
+      <div class="tile-title">
+        <span class="tag">Bachelor's Thesis · NUST × CFLI × PODA</span>
+        <h2>Portable Cold Storage System</h2>
+        <p>A refrigerated room for rural produce transport — funded by CFLI, deployed with an NGO, 3rd place university-wide.</p>
+      </div>
+      <span class="tile-toggle">+</span>
+    </button>
+    <div class="tile-body"><div class="tile-body-inner"><div class="tile-content">
+      <div class="cols cols-3">
+        <div>
+          <p>My year-long bachelor's thesis: a portable cold storage room designed for smallholder farmers to transport fresh produce without spoilage. Funded by the Canada Fund for Local Initiatives and deployed in the field with PODA, an NGO working with women farmers in rural Pakistan.</p>
+          <p>The project placed 3rd university-wide among final year projects, and taught me what it takes to move a design from thermal calculations to a physical build that real users depend on.</p>
+        </div>
+        <div class="stack">
+          <figure>
+            <img src="images/cold-unit.jpg" alt="The portable cold storage unit" loading="lazy">
+            <figcaption>FIG. 1 — The cold storage unit</figcaption>
+          </figure>
+          <figure>
+            <img src="images/cold-check.jpg" alt="The team receiving the award for 3rd place university-wide" loading="lazy">
+            <figcaption>FIG. 2 — 3rd place, university-wide final year projects</figcaption>
+          </figure>
+        </div>
+        <figure>
+          <img src="images/cold-infographic.jpg" alt="Design specifications infographic" loading="lazy">
+          <figcaption>FIG. 3 — Design specifications</figcaption>
+        </figure>
+      </div>
+      <figure class="full">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/kFm4Kv9w2Po" title="Walkthrough of the portable cold storage system" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <figcaption>FIG. 4 — Project walkthrough: the problem, the mechanism, and who it serves</figcaption>
+      </figure>
+    </div></div></div>
+  </article>
+  
+  <!-- ── 04 · VIBRATION MODEL ────────────────────── -->
+  <article class="tile" id="vibration-model">
+    <button class="tile-head" aria-expanded="false">
+      <img class="tile-thumb" src="images/vib-thumb.jpg" alt="11-DOF vehicle-driver vibration model">
+      <div class="tile-title">
+        <span class="tag">NUST · Pakistan</span>
+        <h2>Vehicle–Driver Vibration Model</h2>
+        <p>An 11-DOF coupled model in MATLAB/Simulink, evaluated against ISO 2631 comfort thresholds.</p>
+      </div>
+      <span class="tile-toggle">+</span>
+    </button>
+    <div class="tile-body"><div class="tile-body-inner"><div class="tile-content">
+      <p>I built an 11-degree-of-freedom model coupling a vehicle's suspension and body with a 7-segment human driver submodel, using anatomical spring-damper parameters. Sweeping speeds from 0 to 120 km/h across three road hump profiles, the model identifies the critical speed at which each profile produces peak head acceleration — evaluated against ISO 2631 vibration comfort thresholds.</p>
+      <figure class="full">
+        <img src="images/vib-diagram.jpg" alt="System diagram of the 11-DOF vehicle-driver model and hump profiles" loading="lazy">
+        <figcaption>FIG. 1 — The coupled vehicle–driver system and the three hump profiles</figcaption>
+      </figure>
+      <div class="cols cols-2 full">
+        <figure>
+          <img src="images/vib-simulink.jpg" alt="Simulink implementation of the defining equations" loading="lazy">
+          <figcaption>FIG. 2 — Defining equations in Simulink</figcaption>
+        </figure>
+        <figure>
+          <img src="images/vib-results.jpg" alt="Head acceleration versus car speed for three hump profiles" loading="lazy">
+          <figcaption>FIG. 3 — Head acceleration vs. speed for each profile</figcaption>
+        </figure>
+      </div>
+    </div></div></div>
+  </article>
+  
+  <!-- ══ FOOTER ═════════════════════════════════════ -->
+  <footer>
+    <div class="footer-frame">
+      <span class="footer-note">DRAWN BY M. HUZAIFA · SAINT-ETIENNE, FR</span>
+      <nav class="footer-links">
+        <a href="mailto:huzaifa.malik758@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/malik-huzaifa-9561b820a/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Huzaifa-Malik-Engg" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.tile-head').forEach(function(head){
+    head.addEventListener('click', function(){
+      var tile = head.closest('.tile');
+      var isOpen = tile.classList.toggle('open');
+      head.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
