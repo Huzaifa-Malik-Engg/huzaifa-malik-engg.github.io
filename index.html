@@ -35,7 +35,7 @@
     background-attachment:fixed;
   }
 
-  .sheet{
+  .{
     max-width:1080px;
     margin:0 auto;
     padding:0 20px;
@@ -343,7 +343,6 @@
   <!-- ══ INTRO ══════════════════════════════════════ -->
   <header>
     <div class="drawing-frame">
-      <span class="rev-stamp">SHEET 1 / 1 · REV A</span>
       <div class="intro">
         <img class="intro-photo" src="images/profile.jpg" alt="Portrait of Malik Huzaifa">
         <div class="intro-text">
@@ -372,14 +371,14 @@
     </button>
     <div class="tile-body"><div class="tile-body-inner"><div class="tile-content">
       <p>My master's thesis develops a non-invasive way to monitor what happens at the tool–chip interface during metal cutting, using phased array ultrasonics. I designed the instrumented fixture in SolidWorks and iterated it from 3D-printed prototypes to a metal build, simulated the acoustic behaviour in ABAQUS, and wrote US-Explorer — a complete Python data acquisition and analysis interface for the phased array controller. <a href="https://github.com/Huzaifa-Malik-Engg/US-Explorer" target="_blank" rel="noopener">View the code on GitHub</a>.</p>
-      <div class="cols cols-2">
+      <div>
         <figure>
-          <div class="video-embed portrait">
+          <div class="video-embed portrait" style="margin:0 auto;">
             <iframe src="https://www.youtube.com/embed/ykyyxlxTJsw" title="Fixture assembly and live signal demonstration" allowfullscreen loading="lazy"></iframe>
           </div>
           <figcaption>FIG. 1 — Assembly of the fixture and live signal response</figcaption>
         </figure>
-        <div class="stack">
+        <div class="stack" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
           <figure>
             <img src="images/thesis-print-initial.jpg" alt="Initial 3D-printed prototype of the fixture" loading="lazy">
             <figcaption>FIG. 2 — Initial 3D-printed prototype</figcaption>
@@ -454,7 +453,7 @@
         <img src="images/twin-flowchart.jpg" alt="Flowchart of the production line structure" loading="lazy">
         <figcaption>FIG. 1 — Production line structure, including the proposed robotic upgrade</figcaption>
       </figure>
-      <div class="cols cols-2 full">
+      <div class="pair full">
         <figure>
           <img src="images/twin-product.jpg" alt="Finished wall panel product" loading="lazy">
           <figcaption>FIG. 2 — Finished product</figcaption>
